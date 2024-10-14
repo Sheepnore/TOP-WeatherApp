@@ -1,5 +1,45 @@
-.container{
+*{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+body{
   width: 100vw;
   height: 100vh;
   background-color: antiquewhite;
 }
+
+.container{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: repeat(autofit, minmax(200px,1fr));
+}
+
+.weather{
+  grid-area: 1/2/2/3;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin-top: 5rem;
+  align-items: center;
+}
+
+.location{
+  font-size: 2rem;
+}
+
+.currentConditions{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.gif{
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px gray;
+}
+
