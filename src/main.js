@@ -14,7 +14,7 @@ searchButton.addEventListener('click',()=>{
 
 async function renderPage(city){
   const data = await getWeatherData(city);
-  const weatherGifs = await getGifsData(data.days[1].conditions.split(' ')[1]);
+  const weatherGifs = await getGifsData(data.days[0].conditions.split(' ')[1]);
   console.log(data);
   console.log(weatherGifs);
   renderHtml(data, weatherGifs);
@@ -32,10 +32,12 @@ function renderHtml(data, gifsData){
     // DOM
     location.textContent = data.address;
     
-    currentConditions.textContent = `Current Weather: ${data.days[1].conditions}`;
+    currentConditions.textContent = `Current Weather: ${data.days[0].conditions}`;
     console.log(data);
-    today.textContent = data.days[1].datetime;
+    today.textContent = data.days[0].datetime;
     gif.src = imgSrc;
+
+    gif.classList.toggle('active');
   
 }
 

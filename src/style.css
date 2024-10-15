@@ -37,10 +37,7 @@ body{
 }
 
 .gif{
-  width: 250px;
-  height: 250px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 5px gray;
+  display: none;
 }
 
 .inputContainer{
@@ -52,6 +49,10 @@ body{
   align-items: center;
 }
 
-#cityInput{
-
+.active{
+  display: block;
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px gray;
 }
