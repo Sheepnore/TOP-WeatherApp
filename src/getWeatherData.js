@@ -1,7 +1,5 @@
-const ApiKey = 'B35GQNLG27E5J37ZMHPAK7A4Y';
-
-export async function getData(){
-  const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Taipei%2CTW?unitGroup=metric&include=current%2Cdays&key=${ApiKey}&contentType=json`);
+export async function getWeatherData(city){
+  const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=B35GQNLG27E5J37ZMHPAK7A4Y&contentType=json`);
 
   if (response.ok){
     const data = await response.json();

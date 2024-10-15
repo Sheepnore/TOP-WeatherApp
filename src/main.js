@@ -1,11 +1,20 @@
 import "./style.css";
-import { getData } from "./getWeatherData";
+import { getWeatherData } from "./getWeatherData";
 import {getGifsData} from "./getGifsData";
-import countryFlagEmoji from "country-flag-emoji";
+import { capitalizeFistChar } from "./string"
 
-async function renderPage(){
-  const data = await getData();
-  const weatherGifs = await getGifsData(data.currentConditions.conditions.split(' ')[1]);
+const searchButton = document.querySelector('.search');
+const cityInput = document.querySelector('#cityInput');
+
+searchButton.addEventListener('click',()=>{
+  const city = capitalizeFistChar(cityInput.value);
+
+  renderPage(city);
+})
+
+async function renderPage(city){
+  const data = await getWeatherData(city);
+  const weatherGifs = await getGifsData(data.days[1].conditions.split(' ')[1]);
   console.log(data);
   console.log(weatherGifs);
   renderHtml(data, weatherGifs);
@@ -16,22 +25,17 @@ function renderHtml(data, gifsData){
     const currentConditions = document.querySelector('.currentConditions');
     const today = document.querySelector('.today')
     const gif = document.querySelector('.gif')
-
-    const country = data.address.split(',')[1];
-    const countriesList = countryFlagEmoji.data;
   
     const pickOneFromTen = Math.floor(Math.random()*10);
     const imgSrc = gifsData.data[pickOneFromTen].images.original.url;
 
     // DOM
-    location.textContent = data.address + ' ' + countriesList[country].emoji;
+    location.textContent = data.address;
     
-    currentConditions.textContent = `Current Weather: ${data.currentConditions.conditions}`;
-    today.textContent = data.days[0].datetime;
+    currentConditions.textContent = `Current Weather: ${data.days[1].conditions}`;
+    console.log(data);
+    today.textContent = data.days[1].datetime;
     gif.src = imgSrc;
   
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  renderPage();
-})
